@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>LAN3107 EAII Useful Expressions</title>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
@@ -139,6 +139,112 @@ body{font-family:"Nunito",sans-serif;background-color:#ddeeff;min-height:100vh;o
 .speed-val{font-size:11px;font-weight:800;color:#fff;min-width:32px;text-align:center}
 .speed-reset{background:none;border:1.5px solid rgba(255,255,255,.35);border-radius:50%;width:20px;height:20px;font-size:12px;line-height:1;color:rgba(255,255,255,.7);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;transition:all .15s;flex-shrink:0}
 .speed-reset:hover{color:#fff;border-color:rgba(255,255,255,.6)}
+
+/* =====================================================================
+   RESPONSIVE LAYER (phone / iPad / laptop / desktop) - appended last
+   ===================================================================== */
+:root{--wrap-max:900px;--gut:clamp(12px,3vw,28px)}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{padding-left:env(safe-area-inset-left,0);padding-right:env(safe-area-inset-right,0);overflow-wrap:break-word}
+.wrap{max-width:var(--wrap-max);padding-left:var(--gut);padding-right:var(--gut);padding-bottom:calc(70px + env(safe-area-inset-bottom,0px))}
+.header{padding:clamp(14px,2.5vw,28px) clamp(14px,3vw,32px) clamp(12px,2vw,20px)}
+.header-illo{width:clamp(90px,16vw,200px)}
+.header-text h1{font-size:clamp(17px,1rem + 1vw,30px)}
+.header-text p{font-size:clamp(13px,0.8rem + 0.25vw,16px)}
+.section-block,.expr-table,.two-col-table{max-width:100%}
+.expr-text-wrap,.example-text,.ex-box{overflow-wrap:anywhere}
+.zh-ex,.zh{overflow-wrap:anywhere}
+
+/* now-playing bar respects iPhone home indicator */
+#np-bar{padding:10px calc(16px + env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) calc(16px + env(safe-area-inset-left,0px))}
+
+/* ---- Laptop / iPad landscape ---- */
+@media(min-width:1024px){
+  :root{--wrap-max:1040px}
+  .expr-list li,.bullet-block ul li{font-size:15px}
+  .example-text{font-size:15px}
+  .ex-box{font-size:14px}
+  .zh{font-size:13.5px}.zh-ex{font-size:13px}
+  .section-title{font-size:18px}
+  .tab-btn{font-size:13px;padding:9px 16px}
+  .listen-btn,.see-ex-btn{font-size:12px}
+}
+/* ---- Large desktop ---- */
+@media(min-width:1440px){
+  :root{--wrap-max:1220px}
+  .expr-list li,.bullet-block ul li{font-size:16px}
+  .example-text{font-size:16px}
+  .ex-box{font-size:15px}
+  .zh{font-size:14.5px}.zh-ex{font-size:14px}
+  .col-header-cell{font-size:13px}
+  .subcat-label{font-size:12px}
+  .tab-btn{font-size:14px}
+}
+@media(min-width:1900px){:root{--wrap-max:1400px}}
+
+/* ---- Tablet portrait down: tables stack, tabs scroll ---- */
+@media(max-width:760px){
+  .tab-bar{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+    margin-inline:calc(var(--gut) * -1);padding-inline:var(--gut);scroll-snap-type:x proximity}
+  .tab-bar::-webkit-scrollbar{display:none}
+  .tab-btn{flex:0 0 auto;scroll-snap-align:start}
+
+  /* single-row, N-cell tables -> stacked cells */
+  .expr-table,.expr-table tbody,.expr-table tr,.expr-table td{display:block;width:100%!important}
+  .expr-table td{border-right:none!important}
+
+  /* header/list pairs -> header, list, header, list (in a single column) */
+  .two-col-table,.two-col-table tbody{display:block;width:100%}
+  .two-col-table tbody{display:flex;flex-direction:column}
+  .two-col-table tr{display:contents}
+  .two-col-table td{display:block;width:100%!important}
+  .two-col-table tr:nth-child(odd) td:nth-child(1){order:1}
+  .two-col-table tr:nth-child(even) td:nth-child(1){order:2}
+  .two-col-table tr:nth-child(odd) td:nth-child(2){order:3}
+  .two-col-table tr:nth-child(even) td:nth-child(2){order:4}
+  .two-col-table tr:nth-child(odd) td:nth-child(3){order:5}
+  .two-col-table tr:nth-child(even) td:nth-child(3){order:6}
+  /* second header/list pair (rows 3 & 4) sits after the first pair */
+  .two-col-table tr:nth-child(3) td,.two-col-table tr:nth-child(4) td{order:calc(var(--o,0) + 20)}
+  .two-col-table tr:nth-child(3) td:nth-child(1){order:21}
+  .two-col-table tr:nth-child(4) td:nth-child(1){order:22}
+  .two-col-table tr:nth-child(3) td:nth-child(2){order:23}
+  .two-col-table tr:nth-child(4) td:nth-child(2){order:24}
+  .col-header-cell{text-align:left}
+}
+
+/* ---- Phone ---- */
+@media(max-width:560px){
+  .header-inner{gap:12px}
+  .li-top{flex-wrap:wrap}
+  .listen-btn{margin-top:4px}
+  .example-block,.bullet-block{padding:12px 14px}
+  .expr-list{padding:6px 12px 10px}
+  .speed-wrap{flex-wrap:wrap}
+  #np-text{font-size:12px}
+}
+@media(max-width:420px){
+  .header-inner{flex-direction:column;align-items:flex-start}
+  .header-illo{width:120px}
+  .section-title{font-size:15px;padding:10px 14px}
+}
+
+/* ---- Touch devices (phones + iPads): bigger tap targets ---- */
+@media(pointer:coarse){
+  .tab-btn{min-height:44px}
+  .listen-btn{min-height:36px;padding:6px 14px}
+  .see-ex-btn{min-height:36px;padding:6px 14px}
+  .lang-btn{min-height:32px;padding:5px 12px}
+  .speed-reset{width:30px;height:30px}
+  .speed-slider{width:110px;height:6px}
+  .speed-slider::-webkit-slider-thumb{width:22px;height:22px}
+  .speed-slider::-moz-range-thumb{width:22px;height:22px}
+  #stop-btn{min-height:40px}
+}
+@media(hover:none){.listen-btn:hover{transform:none}}
+@media(orientation:landscape) and (max-height:500px){.header-illo{width:90px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{#np-bar{display:none!important}.tab-panel{display:block!important;page-break-after:always}.tab-bar{display:none}}
 </style>
 </head>
 <body>
@@ -1046,6 +1152,20 @@ function showTab(num){
   stopAudio();
 }
 
+</script>
+
+<script>
+/* Responsive helper: keep the active tab visible in the swipe strip (layout only) */
+(function(){
+  var _s = window.showTab;
+  if (typeof _s === 'function') {
+    window.showTab = function(n){
+      _s(n);
+      var b = document.getElementById('tab-btn-' + n);
+      if (b && b.scrollIntoView) b.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});
+    };
+  }
+})();
 </script>
 </body>
 </html>
